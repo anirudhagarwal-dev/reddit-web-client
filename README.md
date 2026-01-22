@@ -1,16 +1,126 @@
-# React + Vite
+## Reddit Web Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **Reddit-like web client** built with **React and Vite**, featuring a secure **popup-based OAuth 2.0 authentication flow** and a lightweight **Node.js + Express backend** for token exchange.  
+The UI mirrors Reddit’s familiar layout with **left navigation**, a **central feed**, and **right-side widgets**, along with **dark mode** and **responsive design**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 About the Project
 
-## React Compiler
+This project is designed primarily for **learning and experimentation**. It demonstrates how to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Build a modern **Single Page Application (SPA)** using React and React Router
+- Integrate a **third-party OAuth 2.0 provider (Reddit)** using a secure backend
+- Implement a **popup-based login flow** without redirecting the main window
+- Create a **Reddit-style, three-column responsive layout**
+- Handle API failures gracefully using **dummy data fallbacks**
 
-## Expanding the ESLint configuration
+You can use this project as:
+- A starter template for Reddit-style applications
+- A reference for implementing **OAuth popup flows**
+- A simple example of **frontend–backend coordination** in React apps
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- 🔐 **OAuth 2.0 Login (Popup-based)**  
+  Login via Reddit without navigating away from the app
+
+- 🛡 **Secure Token Exchange**  
+  Tokens are exchanged through a Node/Express backend
+
+- 📄 **Subreddit Browsing**  
+  Browse subreddits with `hot`, `new`, and `top` filters
+
+- 📰 **Popular Feed**  
+  Includes **dummy post fallback** if Reddit API fails or rate-limits
+
+- ✍️ **Create Post (Local Draft)**  
+  Create a post draft that appears instantly in the feed
+
+- 👍 **Post Interactions (Local State)**  
+  Upvote, downvote, and save posts (UI-only, local state)
+
+- 🌙 **Dark Mode**  
+  Theme switching using CSS variables
+
+- 📱 **Responsive Layout**  
+  - Desktop: 3-column layout (Left Sidebar, Feed, Right Sidebar)
+  - Mobile: Sidebars hidden for simplicity
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+- React + Vite
+- React Router
+- React Context API (`RedditStore.js`)
+
+### Backend
+- Node.js
+- Express
+- OAuth token exchange with Reddit
+
+---
+
+## 🔑 OAuth Flow (Popup-based)
+
+1. User clicks **Login** in the app.
+2. A popup opens to Reddit’s authorization page.
+3. After approval, Reddit redirects to `/auth/callback` inside the popup.
+4. The popup sends the token back to the main window using `postMessage`.
+5. The popup closes automatically.
+6. The token is stored locally and used for requests to `oauth.reddit.com`.
+
+✔️ The main window never leaves your site.
+
+---
+
+## ⚠️ Notes
+
+- ❌ No secrets are committed — add your own Reddit OAuth credentials
+- 🔄 Dummy posts are used if Reddit’s API fails or rate-limits
+- 📱 Mobile view hides sidebars for better usability
+
+---
+
+## 🧪 Functionality Summary
+
+### Authentication
+- OAuth popup login
+- Secure backend token exchange
+- Profile fetch via `/api/v1/me`
+
+### Subreddit Browsing
+- Dynamic routes: `/r/:name`
+- Fetch and display top posts
+
+### Post Feed
+- Displays title, author, score, thumbnail, and self-text
+
+### Local Interactions
+- Upvote, downvote, and save (UI-only state)
+
+### Create Post
+- Draft UI that prepends a new post to the feed locally
+
+---
+
+## 🚀 Getting Started
+
+```bash
+# Install frontend dependencies
+cd reddit-frontend
+npm install
+
+# Start frontend
+npm run dev
+
+# Install backend dependencies
+cd reddit-backend
+npm install
+
+# Start backend
+npm start
