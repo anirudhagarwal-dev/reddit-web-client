@@ -7,9 +7,8 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { setSubreddit } = useReddit();
-  const [filter, setFilter] = useState("hot"); // hot, new, top
+  const [filter, setFilter] = useState("hot");
 
-  // Create Post State
   const [newPostTitle, setNewPostTitle] = useState("");
   const [newPostContent, setNewPostContent] = useState("");
   const [isCreating, setIsCreating] = useState(false);
